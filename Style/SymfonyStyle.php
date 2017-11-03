@@ -48,8 +48,8 @@ class SymfonyStyle extends OutputStyle
     {
         $this->input = $input;
         $this->bufferedOutput = new BufferedOutput($output->getVerbosity(), false, clone $output->getFormatter());
-        // Windows cmd wraps lines as soon as the terminal width is reached, whether there are following chars or not.
-        $this->lineLength = min($this->getTerminalWidth() - (int) (DIRECTORY_SEPARATOR === '\\'), self::MAX_LINE_LENGTH);
+        // Better fixed length than memory leak! 
+        $this->lineLength = 120;
 
         parent::__construct($output);
     }
